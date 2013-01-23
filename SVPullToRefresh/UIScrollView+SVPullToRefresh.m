@@ -140,14 +140,14 @@ static char UIScrollViewPullToRefreshView;
         
         // default styling values
         self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
-        self.textColor = [UIColor darkGrayColor];
+        self.textColor = [UIColor blackColor];
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.state = SVPullToRefreshStateStopped;
         self.showsDateLabel = NO;
         
-        self.titles = [NSMutableArray arrayWithObjects:NSLocalizedString(@"Pull to refresh...",),
-                                                       NSLocalizedString(@"Release to refresh...",),
-                                                       NSLocalizedString(@"Loading...",),
+        self.titles = [NSMutableArray arrayWithObjects:NSLocalizedString(@"pull to refresh...",),
+                                                       NSLocalizedString(@"release to refresh...",),
+                                                       NSLocalizedString(@"loading...",),
                                                        nil];
         
         self.subtitles = [NSMutableArray arrayWithObjects:@"", @"", @"", @"", nil];
@@ -309,12 +309,15 @@ static char UIScrollViewPullToRefreshView;
 - (UILabel *)titleLabel {
     if(!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 210, 20)];
-        _titleLabel.text = NSLocalizedString(@"Pull to refresh...",);
+        _titleLabel.text = NSLocalizedString(@"pull to refresh...",);
         _titleLabel.font = [UIFont boldSystemFontOfSize:14];
         _titleLabel.backgroundColor = [UIColor clearColor];
-        _titleLabel.textColor = textColor;
         [self addSubview:_titleLabel];
     }
+    
+    /* color may change */
+    _titleLabel.textColor = textColor;
+    
     return _titleLabel;
 }
 
@@ -323,13 +326,16 @@ static char UIScrollViewPullToRefreshView;
         _subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 28, 210, 20)];
         _subtitleLabel.font = [UIFont systemFontOfSize:12];
         _subtitleLabel.backgroundColor = [UIColor clearColor];
-        _subtitleLabel.textColor = textColor;
         [self addSubview:_subtitleLabel];
         
         CGRect titleFrame = self.titleLabel.frame;
         titleFrame.origin.y = 12;
         self.titleLabel.frame = titleFrame;
     }
+    
+    /* color may change */
+    _subtitleLabel.textColor = textColor;
+    
     return _subtitleLabel;
 }
 
@@ -494,7 +500,7 @@ static char UIScrollViewPullToRefreshView;
 
 - (UIColor *)arrowColor {
 	if (arrowColor) return arrowColor;
-	return [UIColor grayColor]; // default Color
+	return [UIColor blackColor]; // default Color
 }
 
 - (void)drawRect:(CGRect)rect {
